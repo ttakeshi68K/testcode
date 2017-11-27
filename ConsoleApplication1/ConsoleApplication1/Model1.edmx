@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="isetanutdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_BRANCH">
+          <Key>
+            <PropertyRef Name="KYOKU_NO" />
+          </Key>
+          <Property Name="PBX_NAME" Type="varchar" MaxLength="20" />
+          <Property Name="KYOKU_NO" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="TENANT_NO" Type="int" Nullable="false" />
+          <Property Name="OUT_PREFIX" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="AREA_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6002: テーブル/ビュー 'isetanutdb.dbo.T_CALLINFO' には主キーが定義されていません。主キーは推論され、定義は読み取り専用のテーブル/ビューとして作成されました。-->
+        <EntityType Name="T_CALLINFO">
+          <Key>
+            <PropertyRef Name="ORG_KYOKU_NO" />
+            <PropertyRef Name="ORG_STN_NO" />
+            <PropertyRef Name="DEST_TEL_NO" />
+            <PropertyRef Name="REGIST_TIME" />
+            <PropertyRef Name="RECFILE_PATH" />
+            <PropertyRef Name="PLAY_FLG" />
+            <PropertyRef Name="ANSWER_FLG" />
+            <PropertyRef Name="CALL_ID" />
+            <PropertyRef Name="SERVER_ID" />
+          </Key>
+          <Property Name="ORG_KYOKU_NO" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="ORG_STN_NO" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="DEST_TEL_NO" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="REGIST_TIME" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="RECFILE_PATH" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="PLAY_FLG" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="ANSWER_FLG" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="CALL_ID" Type="int" Nullable="false" />
+          <Property Name="SERVER_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_IVRLINE">
+          <Key>
+            <PropertyRef Name="SERVER_ID" />
+            <PropertyRef Name="LINE_NO" />
+          </Key>
+          <Property Name="SERVER_ID" Type="int" Nullable="false" />
+          <Property Name="LINE_NO" Type="int" Nullable="false" />
+          <Property Name="KYOKU_NO" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="IVR_TENANT_NO" Type="int" Nullable="false" />
+          <Property Name="IVR_STN_NO" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="REQUEUE_FLG" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_OFFICELINK">
+          <Key>
+            <PropertyRef Name="KYOKU_NO" />
+            <PropertyRef Name="STN_NO" />
+          </Key>
+          <Property Name="KYOKU_NO" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="STN_NO" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="OFFICELINK_NO" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="USER_DEPT" Type="varchar" MaxLength="50" />
+          <Property Name="USER_NAME" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="T_RTTK">
+          <Key>
+            <PropertyRef Name="TENANT_NO" />
+            <PropertyRef Name="ROUTE_NO" />
+            <PropertyRef Name="TRUNK_NO" />
+          </Key>
+          <Property Name="TENANT_NO" Type="int" Nullable="false" />
+          <Property Name="ROUTE_NO" Type="int" Nullable="false" />
+          <Property Name="TRUNK_NO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_SERVER">
+          <Key>
+            <PropertyRef Name="SERVER_ID" />
+          </Key>
+          <Property Name="SERVER_ID" Type="int" Nullable="false" />
+          <Property Name="FILE_PREFIX" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="IP_ADDRESS" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <!--生成中に見つかったエラー:
+警告 6013: テーブル/ビュー 'isetanutdb.dbo.T_SYSTEM' に主キーが定義されておらず、有効な主キーを推論できませんでした。このテーブル/ビューは除外されました。エンティティを使用するには、スキーマを確認し、正しいキーを追加して、コメントを解除する必要があります。
+        <EntityType Name="T_SYSTEM">
+          <Property Name="MONITORED_NO" Type="varchar" MaxLength="16" />
+          <Property Name="CALLINFO_LIMIT" Type="int" />
+          <Property Name="WATCH_FLG" Type="varchar" MaxLength="1" />
+          <Property Name="END_PASSWORD" Type="varchar" MaxLength="10" />
+        </EntityType>-->
+        <EntityContainer Name="isetanutdbModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_BRANCH" EntityType="Self.T_BRANCH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_IVRLINE" EntityType="Self.T_IVRLINE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_OFFICELINK" EntityType="Self.T_OFFICELINK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_RTTK" EntityType="Self.T_RTTK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_SERVER" EntityType="Self.T_SERVER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_CALLINFO" EntityType="Self.T_CALLINFO" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [T_CALLINFO].[ORG_KYOKU_NO] AS [ORG_KYOKU_NO], 
+    [T_CALLINFO].[ORG_STN_NO] AS [ORG_STN_NO], 
+    [T_CALLINFO].[DEST_TEL_NO] AS [DEST_TEL_NO], 
+    [T_CALLINFO].[REGIST_TIME] AS [REGIST_TIME], 
+    [T_CALLINFO].[RECFILE_PATH] AS [RECFILE_PATH], 
+    [T_CALLINFO].[PLAY_FLG] AS [PLAY_FLG], 
+    [T_CALLINFO].[ANSWER_FLG] AS [ANSWER_FLG], 
+    [T_CALLINFO].[CALL_ID] AS [CALL_ID], 
+    [T_CALLINFO].[SERVER_ID] AS [SERVER_ID]
+    FROM [dbo].[T_CALLINFO] AS [T_CALLINFO]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="isetanutdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_BRANCH">
+          <Key>
+            <PropertyRef Name="KYOKU_NO" />
+          </Key>
+          <Property Name="PBX_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="KYOKU_NO" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TENANT_NO" Type="Int32" Nullable="false" />
+          <Property Name="OUT_PREFIX" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AREA_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_IVRLINE">
+          <Key>
+            <PropertyRef Name="SERVER_ID" />
+            <PropertyRef Name="LINE_NO" />
+          </Key>
+          <Property Name="SERVER_ID" Type="Int32" Nullable="false" />
+          <Property Name="LINE_NO" Type="Int32" Nullable="false" />
+          <Property Name="KYOKU_NO" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IVR_TENANT_NO" Type="Int32" Nullable="false" />
+          <Property Name="IVR_STN_NO" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="REQUEUE_FLG" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_OFFICELINK">
+          <Key>
+            <PropertyRef Name="KYOKU_NO" />
+            <PropertyRef Name="STN_NO" />
+          </Key>
+          <Property Name="KYOKU_NO" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STN_NO" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OFFICELINK_NO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_DEPT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="T_RTTK">
+          <Key>
+            <PropertyRef Name="TENANT_NO" />
+            <PropertyRef Name="ROUTE_NO" />
+            <PropertyRef Name="TRUNK_NO" />
+          </Key>
+          <Property Name="TENANT_NO" Type="Int32" Nullable="false" />
+          <Property Name="ROUTE_NO" Type="Int32" Nullable="false" />
+          <Property Name="TRUNK_NO" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_SERVER">
+          <Key>
+            <PropertyRef Name="SERVER_ID" />
+          </Key>
+          <Property Name="SERVER_ID" Type="Int32" Nullable="false" />
+          <Property Name="FILE_PREFIX" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IP_ADDRESS" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="T_CALLINFO">
+          <Key>
+            <PropertyRef Name="ORG_KYOKU_NO" />
+            <PropertyRef Name="ORG_STN_NO" />
+            <PropertyRef Name="DEST_TEL_NO" />
+            <PropertyRef Name="REGIST_TIME" />
+            <PropertyRef Name="RECFILE_PATH" />
+            <PropertyRef Name="PLAY_FLG" />
+            <PropertyRef Name="ANSWER_FLG" />
+            <PropertyRef Name="CALL_ID" />
+            <PropertyRef Name="SERVER_ID" />
+          </Key>
+          <Property Name="ORG_KYOKU_NO" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ORG_STN_NO" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DEST_TEL_NO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="REGIST_TIME" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="RECFILE_PATH" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PLAY_FLG" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ANSWER_FLG" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CALL_ID" Type="Int32" Nullable="false" />
+          <Property Name="SERVER_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="isetanutdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+          <EntitySet Name="T_BRANCH" EntityType="Self.T_BRANCH" />
+          <EntitySet Name="T_IVRLINE" EntityType="Self.T_IVRLINE" />
+          <EntitySet Name="T_OFFICELINK" EntityType="Self.T_OFFICELINK" />
+          <EntitySet Name="T_RTTK" EntityType="Self.T_RTTK" />
+          <EntitySet Name="T_SERVER" EntityType="Self.T_SERVER" />
+          <EntitySet Name="T_CALLINFO" EntityType="Self.T_CALLINFO" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="isetanutdbModelStoreContainer" CdmEntityContainer="isetanutdbEntities">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="isetanutdbModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_BRANCH">
+            <EntityTypeMapping TypeName="isetanutdbModel.T_BRANCH">
+              <MappingFragment StoreEntitySet="T_BRANCH">
+                <ScalarProperty Name="PBX_NAME" ColumnName="PBX_NAME" />
+                <ScalarProperty Name="KYOKU_NO" ColumnName="KYOKU_NO" />
+                <ScalarProperty Name="TENANT_NO" ColumnName="TENANT_NO" />
+                <ScalarProperty Name="OUT_PREFIX" ColumnName="OUT_PREFIX" />
+                <ScalarProperty Name="AREA_CODE" ColumnName="AREA_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_IVRLINE">
+            <EntityTypeMapping TypeName="isetanutdbModel.T_IVRLINE">
+              <MappingFragment StoreEntitySet="T_IVRLINE">
+                <ScalarProperty Name="SERVER_ID" ColumnName="SERVER_ID" />
+                <ScalarProperty Name="LINE_NO" ColumnName="LINE_NO" />
+                <ScalarProperty Name="KYOKU_NO" ColumnName="KYOKU_NO" />
+                <ScalarProperty Name="IVR_TENANT_NO" ColumnName="IVR_TENANT_NO" />
+                <ScalarProperty Name="IVR_STN_NO" ColumnName="IVR_STN_NO" />
+                <ScalarProperty Name="REQUEUE_FLG" ColumnName="REQUEUE_FLG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_OFFICELINK">
+            <EntityTypeMapping TypeName="isetanutdbModel.T_OFFICELINK">
+              <MappingFragment StoreEntitySet="T_OFFICELINK">
+                <ScalarProperty Name="KYOKU_NO" ColumnName="KYOKU_NO" />
+                <ScalarProperty Name="STN_NO" ColumnName="STN_NO" />
+                <ScalarProperty Name="OFFICELINK_NO" ColumnName="OFFICELINK_NO" />
+                <ScalarProperty Name="USER_DEPT" ColumnName="USER_DEPT" />
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_RTTK">
+            <EntityTypeMapping TypeName="isetanutdbModel.T_RTTK">
+              <MappingFragment StoreEntitySet="T_RTTK">
+                <ScalarProperty Name="TENANT_NO" ColumnName="TENANT_NO" />
+                <ScalarProperty Name="ROUTE_NO" ColumnName="ROUTE_NO" />
+                <ScalarProperty Name="TRUNK_NO" ColumnName="TRUNK_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_SERVER">
+            <EntityTypeMapping TypeName="isetanutdbModel.T_SERVER">
+              <MappingFragment StoreEntitySet="T_SERVER">
+                <ScalarProperty Name="SERVER_ID" ColumnName="SERVER_ID" />
+                <ScalarProperty Name="FILE_PREFIX" ColumnName="FILE_PREFIX" />
+                <ScalarProperty Name="IP_ADDRESS" ColumnName="IP_ADDRESS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_CALLINFO">
+            <EntityTypeMapping TypeName="isetanutdbModel.T_CALLINFO">
+              <MappingFragment StoreEntitySet="T_CALLINFO">
+                <ScalarProperty Name="ORG_KYOKU_NO" ColumnName="ORG_KYOKU_NO" />
+                <ScalarProperty Name="ORG_STN_NO" ColumnName="ORG_STN_NO" />
+                <ScalarProperty Name="DEST_TEL_NO" ColumnName="DEST_TEL_NO" />
+                <ScalarProperty Name="REGIST_TIME" ColumnName="REGIST_TIME" />
+                <ScalarProperty Name="RECFILE_PATH" ColumnName="RECFILE_PATH" />
+                <ScalarProperty Name="PLAY_FLG" ColumnName="PLAY_FLG" />
+                <ScalarProperty Name="ANSWER_FLG" ColumnName="ANSWER_FLG" />
+                <ScalarProperty Name="CALL_ID" ColumnName="CALL_ID" />
+                <ScalarProperty Name="SERVER_ID" ColumnName="SERVER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="なし" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

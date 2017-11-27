@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ConsoleApplication1.Properties" GeneratedClassName="PGTSetting">
+  <Profiles />
+  <Settings>
+    <Setting Name="LogPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\logs2\IVRCALL.log</Value>
+    </Setting>
+    <Setting Name="ConnectionStr" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=CCA-MOBILE-01\ISETANUTDB;Initial Catalog=isetanutdb;Persist Security Info=True;User ID=sa;Password=sa2014#</Value>
+    </Setting>
+    <Setting Name="PlayCount" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="SeverIP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="SeverPort" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">20000</Value>
+    </Setting>
+    <Setting Name="SettingFilePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\setttings</Value>
+    </Setting>
+    <Setting Name="SettingFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">PGTSetting.config</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
