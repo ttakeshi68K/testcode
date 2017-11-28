@@ -20,7 +20,7 @@
       <param name="RollingStyle" value="Size" />
 
       <!-- ファイル名 -->
-      <param name="File" value="C:\logs\IVRCALL.log" />
+      <param name="File" value="C:\logs\internal.log" />
 
       <param name="StaticLogFileName" value="false" />
       <!-- ファイル書き込み { 追記: true, 上書き: false } -->

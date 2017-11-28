@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace ConsoleApplication1
 {
-    class PGTXmlStrreamer
+    class XmlStrreamer
 
     {
         // 指定された型で取り込む

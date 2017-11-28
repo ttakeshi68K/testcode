@@ -59,7 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PGTXmlStrreamer.cs" />
+    <Compile Include="OverWriteSetting.cs" />
+    <Compile Include="XmlStrreamer.cs" />
     <Compile Include="ConstInter.cs" />
     <Compile Include="C__RefactorLog.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -145,6 +146,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="PGTSetting.config.xml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -14,10 +14,14 @@ namespace ConsoleApplication1
 {
     class Program
     {
+
+
         /// <summary>
         /// ログ出力機能
         /// </summary>
         private static ILog _cLog = LogManager.GetLogger(C_LOG_NAME.CALL_LOG);
+
+        private static SettingReader curentSettig;
 
         static void Main(string[] args)
         {
@@ -41,15 +45,15 @@ namespace ConsoleApplication1
             try
             {
 
-                SettingReader.Initialize();
+                curentSettig =  new SettingReader();
 
                 // 接続文字列を生成する
-                string connectionString = ConfigurationManager.ConnectionStrings["SQLCON"].ConnectionString;
+                // string connectionString = ConfigurationManager.ConnectionStrings["SQLCON"].ConnectionString;
 
 
                 // SqlConnection の新しいインスタンスを生成する (接続文字列を指定)
                 SqlConnection cSqlConnection = (
-                    new System.Data.SqlClient.SqlConnection(connectionString)
+                    new System.Data.SqlClient.SqlConnection(curentSettig.setting.ConnectionStr)
                 );
 
                 // データベース接続を開く
@@ -79,13 +83,40 @@ namespace ConsoleApplication1
         }
     }
     public class SettingReader {
-        internal static void Initialize()
+
+        /// <summary>
+        /// ログ出力機能
+        /// </summary>
+        private static ILog _cLog = LogManager.GetLogger(C_LOG_NAME.CALL_LOG);
+
+        public OverWriteSetting setting;
+
+        public SettingReader()
         {
-            string setingFilePath = PGTSetting.Default.SettingFilePath;
-            string setingFileName = PGTSetting.Default.SettingFileName;
+            setting = Initialize();
+        }
 
-            // PGTXmlStrreamer.Import()
+        internal OverWriteSetting Initialize()
+        {
+            string _Path = PGTSetting.Default.SettingFilePath + "\\" + PGTSetting.Default.SettingFileName;
 
+            OverWriteSetting curentSettig = null;
+
+            try
+            {
+
+                _cLog.Info("PGTSetting.config'S PATH=" + _Path);
+                curentSettig = (OverWriteSetting)XmlStrreamer.Import(_Path, typeof(OverWriteSetting));
+                _cLog.Info(curentSettig.ToString());
+
+            }
+            catch (Exception ex)
+            {
+                _cLog.Error("error", ex);
+                throw ex;
+            }
+
+            return curentSettig;
 
         }
     }
