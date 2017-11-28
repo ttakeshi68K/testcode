@@ -86,5 +86,32 @@ namespace ConsoleApplication1.Properties {
                 return ((string)(this["SettingFileName"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("IVRCALL")]
+        public string ApLogPrefix {
+            get {
+                return ((string)(this["ApLogPrefix"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("03")]
+        public string ExNo {
+            get {
+                return ((string)(this["ExNo"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ServerID")]
+        public string ServerID {
+            get {
+                return ((string)(this["ServerID"]));
+            }
+        }
     }
 }

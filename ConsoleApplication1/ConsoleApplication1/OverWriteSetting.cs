@@ -13,5 +13,7 @@ namespace ConsoleApplication1
         public int PlayCount = 0;
         public string SeverIP = string.Empty;
         public string SeverPort = string.Empty;
+        public string ExNo = string.Empty;
+
     }
 }

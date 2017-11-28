@@ -5,4 +5,6 @@
   <PlayCount>10</PlayCount>
   <SeverIP>127.0.0.1</SeverIP>
   <SeverPort>20000</SeverPort>
+  <ExNo>03</ExNo>
+  <ServerID>ServerID</ServerID>
 </OverWriteSetting>
