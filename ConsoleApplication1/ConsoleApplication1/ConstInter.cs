@@ -8,6 +8,8 @@ namespace ConsoleApplication1
 {
     public class C_LOG_NAME
     {
+        public const string INTERNAL_LOG = "InternalLog";
         public const string CALL_LOG = "CallLog";
+
     }
 }
