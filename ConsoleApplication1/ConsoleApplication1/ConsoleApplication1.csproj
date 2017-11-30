@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OverWriteSetting.cs" />
+    <Compile Include="SocketRequest.cs" />
     <Compile Include="XmlStrreamer.cs" />
     <Compile Include="ConstInter.cs" />
     <Compile Include="C__RefactorLog.cs">

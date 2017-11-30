@@ -13,6 +13,7 @@ using log4net.Appender;
 using log4net.Repository;
 
 using ConsoleApplication1.Properties;
+using System.IO;
 
 namespace ConsoleApplication1
 {
@@ -102,6 +103,7 @@ namespace ConsoleApplication1
         static private void clogFilePathUpdate()
         {
             bool findLogFile = false;
+            string tmpFileName = string.Empty;
 
             foreach (ILoggerRepository repository in LogManager.GetAllRepositories())
             {
@@ -117,18 +119,20 @@ namespace ConsoleApplication1
                             {
                                 if (file.Contains(PGTSetting.Default.ApLogPrefix))
                                 {
-                                    fileAppender.File = curentSettig.setting.LogPath;
+                                    tmpFileName = curentSettig.setting.LogPath.Replace(".log","");  // .logを削除する
+                                    tmpFileName = tmpFileName.Replace(".LOG", "");  // .logを削除する
+                                    tmpFileName = tmpFileName.Replace(".Log", "");  // .logを削除する
+                                    fileAppender.File = tmpFileName;
+
                                     // ログファイルを排他にしない。
                                     fileAppender.LockingModel = new log4net.Appender.FileAppender.MinimalLock();
                                     fileAppender.ActivateOptions();
                                     findLogFile = true;
                                     /*変更前のファイルを消してしまって良いならばコメントをはずす*/
-                                    /*
                                     if (File.Exists(file))
                                     {
                                         File.Delete(file);
                                     }
-                                    */
                                 }
                                 else
                                 {
@@ -147,6 +151,11 @@ namespace ConsoleApplication1
             if (!findLogFile)
             {
                 _iLog.Error("PGTSetting.config CallLog file Path Change Error! cheack log4net.xml!");
+            }
+            else
+
+            {
+                _iLog.Info("Loding fileAppender.File=" + tmpFileName);
             }
         }
 
@@ -178,7 +187,7 @@ namespace ConsoleApplication1
 
                 _iLog.Info("PGTSetting.config'S PATH=" + _Path);
                 curentSettig = (OverWriteSetting)XmlStrreamer.Import(_Path, typeof(OverWriteSetting));
-                _iLog.Info(getPropertiesFormat(curentSettig, 1));
+                _iLog.Info("LodingPropaties=\n" + getPropertiesFormat(curentSettig, 1));
 
             }
             catch (Exception ex)

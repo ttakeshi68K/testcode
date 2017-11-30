@@ -17,16 +17,18 @@
     <appender name="CallLog" type="log4net.Appender.RollingFileAppender">
 
       <!-- ログファイルの切替 { サイズ: Size, 日付: Date } -->
-      <param name="RollingStyle" value="Size" />
+      <param name="RollingStyle" value="Date" />
 
       <!-- ファイル名 -->
-      <param name="File" value="C:\logs\IVRCALL.log" />
+      <param name="File" value="C:\logs\IVRCALL" />
 
       <param name="StaticLogFileName" value="false" />
+      <param name="DatePattern" value='"_"yyyy-MM-dd".log"' />
+      
       <!-- ファイル書き込み { 追記: true, 上書き: false } -->
       <param name="AppendToFile" value="true" />
 
-      <param name="MaxSizeRollBackups" value="100" />
+      <param name="MaxSizeRollBackups" value="999" />
       <param name="MaximumFileSize" value="1KB" />
       <!-- ログファイルを排他しない -->
       <lockingModel type="log4net.Appender.FileAppender+MinimalLock" />
@@ -49,16 +51,18 @@
     <appender name="InternalLog" type="log4net.Appender.RollingFileAppender">
 
       <!-- ログファイルの切替 { サイズ: Size, 日付: Date } -->
-      <param name="RollingStyle" value="Size" />
+      <param name="RollingStyle" value="Date" />
 
       <!-- ファイル名 -->
-      <param name="File" value="C:\logs\internal.log" />
+      <param name="File" value="C:\logs\internal" />
 
       <param name="StaticLogFileName" value="false" />
+      <param name="DatePattern" value='"_"yyyy-MM-dd".log"' />
+      
       <!-- ファイル書き込み { 追記: true, 上書き: false } -->
       <param name="AppendToFile" value="true" />
 
-      <param name="MaxSizeRollBackups" value="100" />
+      <param name="MaxSizeRollBackups" value="999" />
       <param name="MaximumFileSize" value="1KB" />
       <!-- ログファイルを排他しない -->
       <lockingModel type="log4net.Appender.FileAppender+MinimalLock" />
