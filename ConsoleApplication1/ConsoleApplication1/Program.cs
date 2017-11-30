@@ -19,8 +19,6 @@ namespace ConsoleApplication1
 {
     class Program
     {
-
-
         /// <summary>
         /// ログ出力機能
         /// </summary>
@@ -29,8 +27,9 @@ namespace ConsoleApplication1
 
         private static SettingReader curentSettig;
 
-        private static SqlConnection cSqlConnection;
-
+        private static SqlConnection dblConnection;
+        private static SqlTransaction dbTransaction;
+        private static SqlCommand dbCommand;
 
         static void Main(string[] args)
         {
@@ -84,7 +83,7 @@ namespace ConsoleApplication1
             // SqlConnection の新しいインスタンスを生成する (接続文字列を指定)
             try
             {
-                cSqlConnection = new SqlConnection(curentSettig.setting.ConnectionStr);
+                dblConnection = new SqlConnection(curentSettig.setting.ConnectionStr);
             }
             catch (Exception ex)
             {
@@ -94,7 +93,7 @@ namespace ConsoleApplication1
             // データベース接続を開く
             try
             {
-                cSqlConnection.Open();
+                dblConnection.Open();
             }
             catch (Exception ex)
             {
@@ -104,8 +103,47 @@ namespace ConsoleApplication1
 
             try
             {
+                string sql1 = @"SELECT WATCH_FLG FROM T_SYSTEM WITH(XLOCK,ROWLOCK,NOWAIT)";
 
-                string sql1 = "";
+                dbCommand = dblConnection.CreateCommand();          // コマンドオブジェクト作成
+                dbTransaction = dblConnection.BeginTransaction();   // トランザクションオブジェクト作成
+                dbCommand.Transaction = dbTransaction;              // コマンドにトランザクションを関連付ける
+
+                dbCommand.CommandText = sql1;
+
+                SqlDataReader sdr = dbCommand.ExecuteReader();
+
+                _cLog.Info("T_SYSTEM'S Has RowS=" + sdr.HasRows.ToString());
+
+
+                int rowCount = 0;
+
+                while(sdr.Read())
+                {
+                    rowCount++;
+                    _cLog.Info("T_SYSTEM'S WATCH_FLG=" + sdr["WATCH_FLG"].ToString());
+                }
+
+                if(rowCount !=1)
+                {
+                    _cLog.Info("T_SYSTEM'S FOUND COUNT OVVER COUNt=" + rowCount.ToString());
+                } 
+
+                sdr.Close();
+                dbTransaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                _iLog.Error("error", ex);
+
+            }
+
+
+            try
+            {
+
+                string sql2 = @"";
 
             }
             catch (Exception ex){
@@ -114,8 +152,8 @@ namespace ConsoleApplication1
             finally
             {
                 // データベース接続を閉じる (正しくは オブジェクトの破棄を保証する を参照)
-                cSqlConnection.Close();
-                cSqlConnection.Dispose();
+                dblConnection.Close();
+                dblConnection.Dispose();
 
             }
             _cLog.Info("*** TEST AP END ***");
