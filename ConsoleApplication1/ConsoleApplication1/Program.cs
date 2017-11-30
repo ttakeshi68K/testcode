@@ -31,6 +31,7 @@ namespace ConsoleApplication1
 
         private static SqlConnection cSqlConnection;
 
+
         static void Main(string[] args)
         {
            bool l4nSetingLoadSucess = _iLog.Logger.Repository.Configured;
@@ -53,6 +54,28 @@ namespace ConsoleApplication1
 
             // _cLog.Debug("TEST MSG Debug");
             // _cLog.Info("TEST MSG Info");
+
+
+            SocketRequest sr = new SocketRequest();
+
+            sr.KyokuNo = "03"; 
+            sr.LineNo = "10";
+            sr.MonitorReq = "1";
+            sr.RecFileName = "test_test.wav";
+            sr.ServerID = "10";
+            sr.StnNo = "1";
+            sr.TelNo = "0312345678";
+
+            string tmpStreem = XmlStrreamer.TransPortString(sr);    // クラステキスト化
+
+            // 整形 
+            tmpStreem = tmpStreem.Replace("\r\n", "");
+            tmpStreem = tmpStreem.Replace("  ", ""); // 簡易版　汎用性？
+            string headClass = " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"";
+            tmpStreem = tmpStreem.Replace(headClass, "");
+            string headXML = "<?xml version=\"1.0\" encoding=\"utf-16\"?>";
+            tmpStreem = tmpStreem.Replace(headXML, "");
+            _cLog.Info("SocketRequest.toString=" + tmpStreem);
 
 
             // 接続文字列を生成する

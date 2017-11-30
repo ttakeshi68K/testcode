@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication1
 {
-    class SocketRequest
+    public class SocketRequest
     {
         private string _serverID = string.Empty;
         private string _kyokuNo = string.Empty;
@@ -15,7 +15,6 @@ namespace ConsoleApplication1
         private string _recFileName = string.Empty;
         private string _lineNo = string.Empty;
         private string _monitorReq = string.Empty;
-
 
         public string ServerID
         {
@@ -52,5 +51,6 @@ namespace ConsoleApplication1
             get { return this._monitorReq; }
             set { this._monitorReq = value; }
         }
+        
     }
 }
