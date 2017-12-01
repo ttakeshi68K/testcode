@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <OverWriteSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <LogPath>C:\logs2\IVRCALL.log</LogPath>
-  <ConnectionStr>Data Source=CCA-MOBILE-01\ISETANUTDB;Initial Catalog=isetanutdb;Persist Security Info=True;User ID=sa;Password=sa2014#</ConnectionStr>
+  <ConnectionStr>Data Source=CCA-MOBILE-01\ISETANUTDB;Initial Catalog=isetanutdb;Persist Security Info=True;User ID=sa;Password=sa2014#;MultipleActiveResultSets=true;</ConnectionStr>
   <PlayCount>10</PlayCount>
   <SeverIP>127.0.0.1</SeverIP>
   <SeverPort>20000</SeverPort>

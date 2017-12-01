@@ -27,7 +27,7 @@ namespace ConsoleApplication1
 
         private static SettingReader curentSettig;
 
-        private static SqlConnection dblConnection;
+        private static SqlConnection dbConnection;
         private static SqlTransaction dbTransaction;
         private static SqlCommand dbCommand;
 
@@ -83,7 +83,7 @@ namespace ConsoleApplication1
             // SqlConnection の新しいインスタンスを生成する (接続文字列を指定)
             try
             {
-                dblConnection = new SqlConnection(curentSettig.setting.ConnectionStr);
+                dbConnection = new SqlConnection(curentSettig.setting.ConnectionStr);
             }
             catch (Exception ex)
             {
@@ -93,7 +93,7 @@ namespace ConsoleApplication1
             // データベース接続を開く
             try
             {
-                dblConnection.Open();
+                dbConnection.Open();
             }
             catch (Exception ex)
             {
@@ -103,10 +103,11 @@ namespace ConsoleApplication1
 
             try
             {
-                string sql1 = @"SELECT WATCH_FLG FROM T_SYSTEM WITH(XLOCK,ROWLOCK,NOWAIT)";
+//              string sql1 = @"SELECT WATCH_FLG FROM T_SYSTEM WITH(XLOCK,ROWLOCK,NOWAIT)";
+                string sql1 = @"SELECT WATCH_FLG FROM T_SYSTEM WITH(XLOCK,ROWLOCK)";
 
-                dbCommand = dblConnection.CreateCommand();          // コマンドオブジェクト作成
-                dbTransaction = dblConnection.BeginTransaction();   // トランザクションオブジェクト作成
+                dbCommand = dbConnection.CreateCommand();          // コマンドオブジェクト作成
+                dbTransaction = dbConnection.BeginTransaction();   // トランザクションオブジェクト作成
                 dbCommand.Transaction = dbTransaction;              // コマンドにトランザクションを関連付ける
 
                 dbCommand.CommandText = sql1;
@@ -127,36 +128,83 @@ namespace ConsoleApplication1
                 if(rowCount !=1)
                 {
                     _cLog.Info("T_SYSTEM'S FOUND COUNT OVVER COUNt=" + rowCount.ToString());
-                } 
-
+                }
                 sdr.Close();
+
                 dbTransaction.Commit();
 
             }
             catch (Exception ex)
             {
                 _iLog.Error("error", ex);
-
-            }
-
-
-            try
-            {
-
-                string sql2 = @"";
-
-            }
-            catch (Exception ex){
-                _iLog.Error("error",ex);
+                dbTransaction.Rollback();
             }
             finally
             {
-                // データベース接続を閉じる (正しくは オブジェクトの破棄を保証する を参照)
-                dblConnection.Close();
-                dblConnection.Dispose();
+            }
+
+
+            string CSTMR_TEL_NO = "12345678";
+
+            try
+            {
+                string sql2 = @"SELECT DEST_TEL_NO, PLAY_FLG FROM T_CALLINFO WITH(XLOCK,ROWLOCK) WHERE DEST_TEL_NO = @P_CSTMR_TEL_NO AND PLAY_FLG = '0';";
+                string sql3 = @"UPDATE T_CALLINFO SET PLAY_FLG = '1' WHERE DEST_TEL_NO = @P_CSTMR_TEL_NO AND PLAY_FLG = '0';";
+
+                dbCommand = dbConnection.CreateCommand();          // コマンドオブジェクト作成
+                dbTransaction = dbConnection.BeginTransaction();   // トランザクションオブジェクト作成
+                dbCommand.Transaction = dbTransaction;              // コマンドにトランザクションを関連付ける
+
+                dbCommand.CommandText = sql2;
+                dbCommand.Parameters.AddWithValue("@P_CSTMR_TEL_NO", CSTMR_TEL_NO);
+
+                SqlDataReader sdr = dbCommand.ExecuteReader();
+
+                _cLog.Info("T_CALLINFO'S Has RowS=" + sdr.HasRows.ToString());
+
+
+                int rowCount = 0;
+
+                while (sdr.Read())
+                {
+                    rowCount++;
+                    _cLog.Info("T_CALLINFO'S DEST_TEL_NO=" + sdr["DEST_TEL_NO"].ToString()
+                        + "PLAY_FLG=" + sdr["PLAY_FLG"].ToString());
+                }
+
+                if (rowCount != 1)
+                {
+                    _cLog.Info("T_CALLINFO'S FOUND COUNT OVVER COUNT=" + rowCount.ToString());
+                }
+
+                sdr.Close();
+                dbCommand.CommandText = sql3;
+
+                int resultCount = dbCommand.ExecuteNonQuery();
+
+
+                dbTransaction.Commit();
+
+                _cLog.Info("T_CALLINFO'S UPDATE COUNT=" + resultCount.ToString());
+
 
             }
-            _cLog.Info("*** TEST AP END ***");
+            catch (Exception ex)
+            {
+                _iLog.Error("error", ex);
+                dbTransaction.Rollback();
+            }
+            finally
+            {
+                dbConnection.Close();
+                dbConnection.Dispose();
+
+            }
+
+            // データベース接続を閉じる (正しくは オブジェクトの破棄を保証する を参照)
+
+           _cLog.Info("*** TEST AP END ***");
+
 
         }
 
