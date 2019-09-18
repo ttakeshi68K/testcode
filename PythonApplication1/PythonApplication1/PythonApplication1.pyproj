@@ -23,7 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PythonApplication30.py" />
-    <Compile Include="PythonApplication31.py">
+    <Compile Include="PythonApplication32.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
