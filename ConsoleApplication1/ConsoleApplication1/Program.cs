@@ -83,7 +83,17 @@ namespace ConsoleApplication1
             // SqlConnection の新しいインスタンスを生成する (接続文字列を指定)
             try
             {
-                dbConnection = new SqlConnection(curentSettig.setting.ConnectionStr);
+                
+
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(curentSettig.setting.ConnectionStr);
+
+                builder.ConnectRetryCount = 3;
+                builder.ConnectRetryInterval = 5;
+                builder.LoadBalanceTimeout = 43200;
+                builder.MultipleActiveResultSets = true;
+
+                dbConnection = new SqlConnection(builder.ConnectionString);
+
             }
             catch (Exception ex)
             {
