@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1f74f75e-60f6-4458-a410-4b936c77213e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>PythonApplication30.py</StartupFile>
+    <StartupFile>PythonApplication32.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="PythonApplication30.py" />
+    <None Include="PythonApplication30.py" />
     <Compile Include="PythonApplication32.py">
       <SubType>Code</SubType>
     </Compile>
