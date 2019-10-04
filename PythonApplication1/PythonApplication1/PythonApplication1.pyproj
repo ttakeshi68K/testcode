@@ -5,13 +5,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1f74f75e-60f6-4458-a410-4b936c77213e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>PythonApplication32.py</StartupFile>
+    <StartupFile>PythonApplication39.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>PythonApplication1</Name>
     <RootNamespace>PythonApplication1</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,10 +23,21 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PythonApplication33.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PythonApplication39 - Copy %282%29.py" />
+    <Compile Include="PythonApplication39 - Copy.py" />
+    <Compile Include="PythonApplication39.py">
+      <SubType>Code</SubType>
+    </Compile>
     <None Include="PythonApplication30.py" />
     <Compile Include="PythonApplication32.py">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="di-pybasic3801.gif" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

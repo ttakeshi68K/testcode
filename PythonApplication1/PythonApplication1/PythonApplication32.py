@@ -1,6 +1,6 @@
 class MyStack3(list):
     def __init__(self, *args):
-        # print(args)  # 可変長位置引数を確認したければコメントアウト
+        # print(args)  # 
         super().__init__(args)
     def push(self, item):
         self.append(item)
