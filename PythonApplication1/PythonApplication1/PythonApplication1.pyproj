@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1f74f75e-60f6-4458-a410-4b936c77213e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>PythonApplication39.py</StartupFile>
+    <StartupFile>PythonApplication43.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -29,6 +29,13 @@
     <Compile Include="PythonApplication39 - Copy %282%29.py" />
     <Compile Include="PythonApplication39 - Copy.py" />
     <Compile Include="PythonApplication39.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PythonApplication42 - Copy.py" />
+    <Compile Include="PythonApplication42.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PythonApplication43.py">
       <SubType>Code</SubType>
     </Compile>
     <None Include="PythonApplication30.py" />
