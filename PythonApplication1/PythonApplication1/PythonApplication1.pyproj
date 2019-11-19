@@ -41,7 +41,10 @@
     <Compile Include="PythonApplication43_2.py" />
     <Compile Include="PythonApplication44.py" />
     <Compile Include="PythonApplication45.py" />
-    <Compile Include="PythonApplication46.py" />
+    <Compile Include="PythonApplication46&amp;47.py" />
+    <Compile Include="PythonApplication47_1.py" />
+    <Compile Include="PythonApplication47_2.py" />
+    <Compile Include="PythonApplication48.py" />
     <None Include="PythonApplication30.py" />
     <Compile Include="PythonApplication32.py">
       <SubType>Code</SubType>
